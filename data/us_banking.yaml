@@ -1,0 +1,67 @@
+# United States Banking holiday definitions for the Ruby Holiday gem.
+#
+# Updated: 2012-06-11.
+# Source:  http://en.wikipedia.org/wiki/Public_holidays_of_the_United_States
+---
+months:
+  1:
+  - name: New Year's Day
+    regions: [us_banking]
+    mday: 1
+    observed: to_monday_if_sunday
+  - name: Martin Luther King, Jr. Day
+    week: 3
+    regions: [us_banking]
+    wday: 1
+  2:
+  - name: Presidents' Day
+    week: 3
+    regions: [us_banking]
+    wday: 1
+  5:
+  - name: Memorial Day
+    week: -1
+    regions: [us_banking]
+    wday: 1
+  7:
+  - name: Independence Day
+    regions: [us_banking]
+    mday: 4
+    observed: to_monday_if_sunday
+  9:
+  - name: Labor Day
+    week: 1
+    regions: [us_banking]
+    wday: 1
+  10:
+  - name: Columbus Day
+    week: 2
+    regions: [us_banking]
+    wday: 1
+  11:
+  - name: Veterans Day
+    regions: [us_banking]
+    mday: 11
+    observed: to_monday_if_sunday
+  - name: Thanksgiving
+    week: 4
+    regions: [us_banking]
+    wday: 4
+  12:
+  - name: Christmas Day
+    regions: [us_banking]
+    mday: 25
+    observed: to_monday_if_sunday
+tests: |
+    {Date.civil(2012,1,2) => 'New Year\'s Day',
+     Date.civil(2012,1,16) => 'Martin Luther King, Jr. Day',
+     Date.civil(2012,2,20) => 'Presidents\' Day',
+     Date.civil(2012,5,28) => 'Memorial Day',
+     Date.civil(2012,7,4) => 'Independence Day',
+     Date.civil(2012,9,3) => 'Labor Day',
+     Date.civil(2012,10,8) => 'Columbus Day',
+     Date.civil(2012,11,12) => 'Veterans Day',
+     Date.civil(2012,11,22) => 'Thanksgiving',
+     Date.civil(2012,12,25) => 'Christmas Day'}.each do |date, name|
+      assert_equal name, (Holidays.on(date, :us_banking, :observed)[0] || {})[:name]
+    end

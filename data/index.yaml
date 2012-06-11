@@ -28,6 +28,7 @@ defs:
   PT: ['pt.yaml']
   SE: ['se.yaml']
   US: ['us.yaml', 'north_america_informal.yaml']
+  US_Banking: ['us_banking.yaml']
   United_Nations: ['united_nations.yaml']
   UPS: ['ups.yaml']
   ZA: ['za.yaml']
