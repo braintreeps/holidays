@@ -55,7 +55,7 @@ module Holidays
             {:function => lambda { |year| Holidays.easter(year)+1 }, :function_id => "easter(year)+1", :name => "Lundi de Pâques", :regions => [:fr]},
             {:function => lambda { |year| Holidays.easter(year)+49 }, :function_id => "easter(year)+49", :type => :informal, :name => "Pentecôte", :regions => [:fr]},
             {:function => lambda { |year| Holidays.easter(year)+50 }, :function_id => "easter(year)+50", :name => "Lundi de Pentecôte", :regions => [:fr]},
-            {:function => lambda { |year| Holidays.easter(year)-2 }, :function_id => "easter(year)-2", :name => "Good Friday", :regions => [:gb]},
+            {:function => lambda { |year| Holidays.easter(year)-2 }, :function_id => "easter(year)-2", :name => "Good Friday", :regions => [:gb, :ie]},
             {:function => lambda { |year| Holidays.easter(year) }, :function_id => "easter(year)", :name => "Easter Sunday", :regions => [:gb]},
             {:function => lambda { |year| Holidays.easter(year) }, :function_id => "easter(year)", :name => "Uskrs", :regions => [:hr]},
             {:function => lambda { |year| Holidays.easter(year)+1 }, :function_id => "easter(year)+1", :name => "Uskrsni ponedjeljak", :regions => [:hr]},

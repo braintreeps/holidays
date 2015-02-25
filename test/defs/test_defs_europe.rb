@@ -300,6 +300,7 @@ assert !Date.civil(2012,3,14).holiday?(:hu), '2012-03-14 is not a holiday in Hun
 
 {Date.civil(2008,1,1) => 'New Year\'s Day', 
  Date.civil(2008,3,17) => 'St. Patrick\'s Day',
+ Date.civil(2008,3,21) => 'Good Friday',
  Date.civil(2008,3,24) => 'Easter Monday',
  Date.civil(2008,5,5) => 'May Day',
  Date.civil(2008,6,2) => 'June Bank Holiday',
@@ -311,6 +312,7 @@ assert !Date.civil(2012,3,14).holiday?(:hu), '2012-03-14 is not a holiday in Hun
 end
 {Date.civil(2012,1,2) => 'New Year\'s Day', 
  Date.civil(2012,3,19) => 'St. Patrick\'s Day',
+ Date.civil(2012,4,6) => 'Good Friday',
  Date.civil(2012,4,9) => 'Easter Monday',
  Date.civil(2012,5,7) => 'May Day',
  Date.civil(2012,6,4) => 'June Bank Holiday',
