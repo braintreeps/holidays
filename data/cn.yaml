@@ -1,0 +1,90 @@
+# Chinese holiday definitions for the Ruby Holiday gem.
+# Updated: 2016-04-22.
+# Sources:
+# - http://english.gov.cn/services/2015/12/11/content_281475252239869.htm
+---
+months:
+  1:
+  - name: New Year's Day
+    regions: [cn]
+    mday: 1
+  2:
+  - name: 1. Spring Festival
+    regions: [cn]
+    function: spring_festival(1, year)
+  - name: 2. Spring Festival
+    regions: [cn]
+    function: spring_festival(2, year)
+  - name: 3. Spring Festival
+    regions: [cn]
+    function: spring_festival(3, year)
+  - name: 4. Spring Festival
+    regions: [cn]
+    function: spring_festival(4, year)
+  - name: 5. Spring Festival
+    regions: [cn]
+    function: spring_festival(5, year)
+  4:
+  - name: Qingming Festival
+    regions: [cn]
+    function: qingming_festival(year)
+  5:
+  - name: Labor Day
+    regions: [cn]
+    function: labor_day(year)
+  6:
+  - name: 1. Dragon Boat Festival
+    regions: [cn]
+    mday: 9
+  - name: 2. Dragon Boat Festival
+    regions: [cn]
+    mday: 10
+  9:
+  - name: 1. Mid-Autumn Festival
+    regions: [cn]
+    mday: 15
+  - name: 2. Mid-Autumn Festival
+    regions: [cn]
+    mday: 16
+methods:
+  set_error_handler: |
+    def self.set_error_handler(hash)
+      hash.default_proc = proc do |_,_| raise ArgumentError.new("Unsupported year, must be one of [#{hash.keys.join(',')}]") end
+      hash
+    end
+  spring_festival: |
+    def self.spring_festival(festival_day_number, year)
+      holiday_dates = set_error_handler({2016 => Date.new(2016, 2, 8)})
+      base_date = holiday_dates[year] + festival_day_number - 1
+    end
+  qingming_festival: |
+    def self.qingming_festival(year)
+      holiday_dates = set_error_handler({2016 => Date.new(2016, 4, 4)})
+      holiday_dates[year]
+    end
+  labor_day: |
+    def self.labor_day(year)
+      holiday_dates = set_error_handler({2016 => Date.new(2016, 5, 2)})
+      holiday_dates[year]
+    end
+
+tests: |
+    {Date.civil(2016,1,1) => "New Year's Day",
+     Date.civil(2016,2,8) => "1. Spring Festival",
+     Date.civil(2016,2,9) => "2. Spring Festival",
+     Date.civil(2016,2,10) => "3. Spring Festival",
+     Date.civil(2016,2,11) => "4. Spring Festival",
+     Date.civil(2016,2,12) => "5. Spring Festival",
+     Date.civil(2016,4,4) => "Qingming Festival",
+     Date.civil(2016,5,2) => "Labor Day",
+     Date.civil(2016,6,9) => "1. Dragon Boat Festival",
+     Date.civil(2016,6,10) => "2. Dragon Boat Festival",
+     Date.civil(2016,9,15) => "1. Mid-Autumn Festival",
+     Date.civil(2016,9,16) => "2. Mid-Autumn Festival",
+     Date.civil(2016,10,3) => "1. National Day",
+     Date.civil(2016,10,4) => "2. National Day",
+     Date.civil(2016,10,5) => "3. National Day",
+     Date.civil(2016,10,6) => "4. National Day",
+     Date.civil(2016,10,7) => "5. National Day",}.each do |date, name|
+      assert_equal name, (Holidays.on(date, :cn, :informal)[0] || {})[:name]
+    end
